@@ -32,7 +32,7 @@
     keyserver: "{{ docker_key_server }}"
 
 - apt_repository:
-    repo: deb https://apt.dockerproject.org/repo/ubuntu {{ ansible_distribution_release }} main
+    repo: deb https://apt.dockerproject.org/repo/ ubuntu-{{ ansible_distribution_release }} main
     state: present
     filename: 'docker'
     update_cache: yes
