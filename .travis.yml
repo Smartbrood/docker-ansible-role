@@ -1,0 +1,40 @@
+---
+language: python
+python: "2.7"
+
+git:
+  depth: 3
+
+dist: trusty
+sudo: required
+
+env:
+  matrix:
+    - >
+      IMAGE=host
+
+# Build only branches
+branches:
+  only:
+  - master
+
+# Install apt packages
+addons:
+  apt:
+    packages:
+    - python-pip
+    - ca-certificates
+    - make
+
+before_install:
+  - pip install ansible
+  - ansible --version
+  - printf '[defaults]\nroles_path=../\n[privilege_escalation]\nbecome=True\nbecome_method=sudo\nbecome_user=root' >ansible.cfg
+
+install: true
+
+script:
+  - if [ "${IMAGE}" = "host" ]; then make host ; else make docker ; fi
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/

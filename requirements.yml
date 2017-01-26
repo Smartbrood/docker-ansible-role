@@ -1,0 +1,2 @@
+- src: Smartbrood.docker-ansible-role
+  name: docker

@@ -1,0 +1,18 @@
+dependencies: []
+
+galaxy_info:
+  author: Andrey N. Petrov
+  owner: Andrey N. Petrov
+  description: Setup Docker
+  company: Smartbrood LLC
+  license: Apache
+  min_ansible_version: 1.2
+
+  platforms:
+  - name: Ubuntu
+    versions:
+     - xenial
+     - trusty
+
+  galaxy_tags:
+  - docker

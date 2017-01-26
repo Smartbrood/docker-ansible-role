@@ -1,0 +1,15 @@
+---
+# defaults file for docker-ansible-role
+
+tests_enabled: false
+
+docker_packages:
+  - curl
+  - linux-image-extra-virtual
+  - apt-transport-https
+  - ca-certificates
+
+docker_gpg_key: 58118E89F3A912897C070ADBF76221572C52609D
+docker_key_server: hkp://p80.pool.sks-keyservers.net:80
+
+

@@ -1,0 +1,53 @@
+---
+# tasks file for docker-ansible-role
+
+- name: Test Architecture
+  assert:
+    that:
+      - "ansible_architecture == 'x86_64'"
+    msg: "Architecture must be x86_64."
+
+- name: Test Distribution
+  assert:
+    that:
+      - "ansible_distribution == 'Ubuntu'"
+    msg: "Distribution must be Ubuntu."
+
+- name: Test Distribution Release
+  assert:
+    that:
+      - "ansible_distribution_release == 'xenial' or ansible_distribution_release == 'trusty'"
+    msg: "Distribution must be Ubuntu Xenial or Trusty."
+
+- name: ensure docker dependencies are installed
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ docker_packages }}"
+
+- name: ensure Docker GPG key is present
+  apt_key:
+    id: "{{ docker_gpg_key }}"
+    keyserver: "{{ docker_key_server }}"
+
+- apt_repository:
+    repo: deb https://apt.dockerproject.org/repo/ubuntu-{{ ansible_distribution_release }} main
+    state: present
+    filename: 'docker'
+    update_cache: yes
+
+- name: ensure docker is installed
+  apt:
+    name: docker-engine
+    state: present
+
+- name: start docker
+  service:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: Include tests.yml
+  include: tests.yml
+  when: 
+    - tests_enabled
