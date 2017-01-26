@@ -23,6 +23,7 @@
   apt:
     name: "{{ item }}"
     state: present
+    update_cache: yes
   with_items: "{{ docker_packages }}"
 
 - name: ensure Docker GPG key is present
@@ -31,7 +32,7 @@
     keyserver: "{{ docker_key_server }}"
 
 - apt_repository:
-    repo: deb https://apt.dockerproject.org/repo/ubuntu-{{ ansible_distribution_release }} main
+    repo: deb https://apt.dockerproject.org/repo/ubuntu {{ ansible_distribution_release }} main
     state: present
     filename: 'docker'
     update_cache: yes
