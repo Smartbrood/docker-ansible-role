@@ -19,13 +19,6 @@
       - "ansible_distribution_release == 'xenial' or ansible_distribution_release == 'trusty'"
     msg: "Distribution must be Ubuntu Xenial or Trusty."
 
-- name: ensure docker dependencies are installed
-  apt:
-    name: "{{ item }}"
-    state: present
-    update_cache: yes
-  with_items: "{{ docker_packages }}"
-
 - name: ensure Docker GPG key is present
   apt_key:
     id: "{{ docker_gpg_key }}"
@@ -35,12 +28,13 @@
     repo: deb https://apt.dockerproject.org/repo/ ubuntu-{{ ansible_distribution_release }} main
     state: present
     filename: 'docker'
-    update_cache: yes
 
-- name: ensure docker is installed
+- name: install docker packages
   apt:
-    name: docker-engine
+    name: "{{ item }}"
     state: present
+    update_cache: yes
+  with_items: "{{ docker_packages }}"
 
 - name: start docker
   service:
