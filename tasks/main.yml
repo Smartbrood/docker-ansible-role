@@ -35,7 +35,7 @@
   with_items: "{{ docker_dependency_packages }}"
 
 - apt_repository:
-    repo: deb https://apt.dockerproject.org/repo/ {{ ansible_distribution }}-{{ ansible_distribution_release }} main
+    repo: deb https://apt.dockerproject.org/repo/ {{ ansible_distribution|lower }}-{{ ansible_distribution_release }} main
     state: present
     filename: 'docker'
 
