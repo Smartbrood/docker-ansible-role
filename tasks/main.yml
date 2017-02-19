@@ -46,7 +46,12 @@
     update_cache: yes
   with_items: "{{ docker_packages }}"
 
-- name: install docker compose
+- name: install pip for docker-compose installation
+  easy_install:
+    name: pip
+    state: latest
+
+- name: install docker-compose
   pip:
     name: docker-compose
     state: latest

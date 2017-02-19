@@ -5,4 +5,3 @@ docker_dependency_packages:
   - linux-image-extra-virtual
   - apt-transport-https
   - ca-certificates
-  - python-pip

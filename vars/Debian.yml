@@ -5,4 +5,3 @@ docker_dependency_packages:
   - ca-certificates
   - curl
   - python-software-properties
-  - python-pip
