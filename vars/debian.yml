@@ -1,0 +1,7 @@
+---
+
+docker_dependency_packages:
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - python-software-properties

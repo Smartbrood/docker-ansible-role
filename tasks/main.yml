@@ -19,6 +19,11 @@
       - "ansible_distribution_release == 'xenial' or ansible_distribution_release == 'trusty' or ansible_distribution_release == 'wheezy'"
     msg: "Distribution must be Ubuntu Xenial, Trusty or Debian Wheezy."
 
+- name: Include debian vars
+  include: vars/debian.yml
+  when: 
+    - ansible_distribution == 'Debian'
+
 - name: ensure Docker GPG key is present
   apt_key:
     id: "{{ docker_gpg_key }}"
