@@ -1,0 +1,7 @@
+---
+
+docker_dependency_packages:
+  - curl
+  - linux-image-extra-virtual
+  - apt-transport-https
+  - ca-certificates
