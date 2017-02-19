@@ -13,6 +13,9 @@ galaxy_info:
     versions:
      - xenial
      - trusty
+  - name: Debian
+    versions:
+     - wheezy
 
   galaxy_tags:
   - docker

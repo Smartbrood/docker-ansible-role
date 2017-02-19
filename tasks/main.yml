@@ -10,14 +10,14 @@
 - name: Test Distribution
   assert:
     that:
-      - "ansible_distribution == 'Ubuntu'"
-    msg: "Distribution must be Ubuntu."
+      - "ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian'"
+    msg: "Distribution must be Ubuntu or Debian."
 
 - name: Test Distribution Release
   assert:
     that:
-      - "ansible_distribution_release == 'xenial' or ansible_distribution_release == 'trusty'"
-    msg: "Distribution must be Ubuntu Xenial or Trusty."
+      - "ansible_distribution_release == 'xenial' or ansible_distribution_release == 'trusty' or ansible_distribution_release == 'wheezy'"
+    msg: "Distribution must be Ubuntu Xenial, Trusty or Debian Wheezy."
 
 - name: ensure Docker GPG key is present
   apt_key:
@@ -25,7 +25,7 @@
     keyserver: "{{ docker_key_server }}"
 
 - apt_repository:
-    repo: deb https://apt.dockerproject.org/repo/ ubuntu-{{ ansible_distribution_release }} main
+    repo: deb https://apt.dockerproject.org/repo/ {{ ansible_distribution }}-{{ ansible_distribution_release }} main
     state: present
     filename: 'docker'
 
