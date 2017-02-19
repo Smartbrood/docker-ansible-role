@@ -24,6 +24,13 @@
     id: "{{ docker_gpg_key }}"
     keyserver: "{{ docker_key_server }}"
 
+- name: install docker dependency packages
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items: "{{ docker_dependency_packages }}"
+
 - apt_repository:
     repo: deb https://apt.dockerproject.org/repo/ {{ ansible_distribution }}-{{ ansible_distribution_release }} main
     state: present

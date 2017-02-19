@@ -3,11 +3,13 @@
 
 tests_enabled: false
 
-docker_packages:
+docker_dependency_packages:
   - curl
   - linux-image-extra-virtual
   - apt-transport-https
   - ca-certificates
+
+docker_packages:
   - docker-engine={{ docker_version }}
 
 docker_version: 1.13.*
