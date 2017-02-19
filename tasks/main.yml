@@ -16,8 +16,8 @@
 - name: Test Distribution Release
   assert:
     that:
-      - "ansible_distribution_release == 'xenial' or ansible_distribution_release == 'trusty' or ansible_distribution_release == 'wheezy'"
-    msg: "Distribution must be Ubuntu Xenial, Trusty or Debian Wheezy."
+      - "ansible_distribution_release == 'xenial' or ansible_distribution_release == 'trusty' or ansible_distribution_release == 'jessie'"
+    msg: "Distribution must be Ubuntu Xenial, Trusty or Debian Jessie."
 
 - name: Include vars
   include_vars: "{{ ansible_distribution }}.yml"
