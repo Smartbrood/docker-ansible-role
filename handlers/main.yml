@@ -1,5 +1,4 @@
 ---
-# handlers file for docker-ansible-role
 
 - name: restart docker
   service:

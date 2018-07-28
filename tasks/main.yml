@@ -1,5 +1,4 @@
 ---
-# tasks file for docker-ansible-role
 
 - name: Test Architecture
   assert:
@@ -7,25 +6,18 @@
       - "ansible_architecture == 'x86_64'"
     msg: "Architecture must be x86_64."
 
-- name: Test Distribution
-  assert:
-    that:
-      - "ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian'"
-    msg: "Distribution must be Ubuntu or Debian."
-
 - name: Test Distribution Release
   assert:
     that:
-      - "ansible_distribution_release == 'xenial' or ansible_distribution_release == 'trusty' or ansible_distribution_release == 'jessie'"
-    msg: "Distribution must be Ubuntu Xenial, Trusty or Debian Jessie."
+      - "ansible_distribution_release == 'xenial'"
+    msg: "Distribution must be Ubuntu Xenial"
 
 - name: Include vars
   include_vars: "{{ ansible_distribution }}.yml"
 
 - name: ensure Docker GPG key is present
   apt_key:
-    id: "{{ docker_gpg_key }}"
-    keyserver: "{{ docker_key_server }}"
+    url: "https://download.docker.com/linux/ubuntu/gpg"
 
 - name: install docker dependency packages
   apt:
@@ -35,7 +27,7 @@
   with_items: "{{ docker_dependency_packages }}"
 
 - apt_repository:
-    repo: deb https://apt.dockerproject.org/repo/ {{ ansible_distribution|lower }}-{{ ansible_distribution_release }} main
+    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
     state: present
     filename: 'docker'
 
